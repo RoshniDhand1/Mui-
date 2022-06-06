@@ -49,6 +49,7 @@ export default function FormView() {
     const [user,setUser] = useState([]);
     const [select,setSelect]= useState();
     const [ageError, setAgeError] = useState(false);
+    const [stateError, setStateError] = useState(false);
     const [value, setValue] = React.useState("");
 
     useEffect(()=>{
@@ -85,6 +86,11 @@ export default function FormView() {
       } else {
         setAgeError('Please select an option.');
       }
+
+      if(!select){
+          setStateError("Please Select Atleast One State")
+      }
+      
     }
     return (
         <Box>
@@ -127,7 +133,10 @@ export default function FormView() {
                     </FormControl>
                 </Grid>
                 <Grid item xs={12}>
-                    <FormLabel>State *</FormLabel>
+                    <FormLabel>State * 
+                  {select?"":  <FormHelperText error ={true}>{stateError}</FormHelperText>}
+
+                    </FormLabel>
                     <Grid container
                         direction="row"
                         spacing={1}
